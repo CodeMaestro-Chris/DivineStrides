@@ -1,0 +1,267 @@
+<!-- /*
+* Template Name: Volunteer
+* Template Author: Untree.co
+* Tempalte URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Untree.co">
+	<link rel="shortcut icon" href="favicon.png">
+
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+
+	<link rel="stylesheet" href="fonts/icomoon/style.css">
+	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+
+	<link rel="stylesheet" href="css/tiny-slider.css">
+	<link rel="stylesheet" href="css/aos.css">
+	<link rel="stylesheet" href="css/flatpickr.min.css">
+	<link rel="stylesheet" href="css/glightbox.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<title>Divine-Strides-INC</title>
+</head>
+<body>
+
+	<div class="site-mobile-menu site-navbar-target">
+		<div class="site-mobile-menu-header">
+			<div class="site-mobile-menu-close">
+				<span class="icofont-close js-menu-toggle"></span>
+			</div>
+		</div>
+		<div class="site-mobile-menu-body"></div>
+	</div>
+
+	<nav class="site-nav">
+		<div class="container">
+			<div class="menu-bg-wrap">
+				<div class="site-navigation">
+					<div class="row g-0 align-items-center">
+						<div class="col-2">
+							<a href="index.html" class="col-2 logo m-0 float-start text-white"><img src="./images/logo2-white.png" alt=""></a>
+						</div>
+						<div class="col-8 text-center">
+							<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="about.html">About</a></li>
+								<li><a href="donate.html">Donate</a></li>
+								<li class="active"><a href="contact.html">Contact</a></li>
+							</ul>
+						</div>
+						<div class="col-2 text-end">
+							<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light">
+								<span></span>
+							</a>
+
+							<a href="#" class="call-us d-flex align-items-center">
+								<span class="icon-phone"></span>
+								<span>+1(240)-645-2283</span>
+							</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="hero overlay" style="background-image: url('images/people-working-marketing-agency.jpg')">
+		<div class="container">
+			<div class="row align-items-center justify-content-center">
+				<div class="col-lg-6 text-center">
+					<h1 class="heading text-white mb-2" data-aos="fade-up">Contact Us</h1>
+					<p data-aos="fade-up" class=" mb-4 text-white lead text-white-50">Have questions or want to get involved? Whether you’re looking to volunteer, donate, or seek assistance. Reach out today and let’s make a difference together!</p>
+					<p data-aos="fade-up"  data-aos-delay="100">
+						<a href="#" class="btn btn-primary me-4">Donate Now</a> 
+					</p>		
+					
+				</div>
+
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="container">
+			<div class="row mb-5">
+				<div class="col-lg-6" data-aos="fade-up">
+					<h2 class="heading">Reach Out to Us</h2>
+					<p class="text-black-50">Fill out the form below, and our team will get back to you as soon as possible. Whether you have inquiries, need assistance, or want to collaborate, we’re here to help!</p>
+				</div>
+			</div>
+
+			<form action="https://formspree.io/f/meoebwwz" class="row justify-content-between" onsubmit="return validate()" method="POST">
+
+				<div class="col-md-6 col-lg-6" data-aos="fade-up" data-aos-delay="100">
+					<div class="row">
+
+						<div class="mb-3 col-lg-6">
+							<label for="name" class="ps-3 fw-bold mb-2">Name</label>
+							<input type="text" class="form-control" id="name" name="name">
+						</div>
+						<div class="mb-3 col-lg-6">
+							<label for="email" class="ps-3 fw-bold mb-2">Email</label>
+							<input type="email" class="form-control" id="email" name="email">
+						</div>
+
+						<div class="mb-3 col-lg-12">
+							<label for="message" class="ps-3 fw-bold mb-2">Message</label>
+							<textarea name="message" id="message" class="form-control" cols="30" rows="10"></textarea>
+						</div>	
+						
+						<i><p id="error"></p></i>
+						<div class="col-lg-6">
+							<button type="submit" class="btn btn-primary text-white py-3">SEND MESSAGE</button>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-5" data-aos="fade-up" data-aos-delay="200">
+					<div class="row">
+						<div class="col-6 col-lg-6 mb-4">
+							<h3 class="h6 fw-bold text-secondary">Address</h3>
+							<p>11313 Lockwood Dr, Silver Spring, MD 20904</p>
+							<p>9515 Gerwig Lane, Unit 104, Columbia, MD 21046 </p>
+						</div>
+						<div class="col-6 col-lg-6 mb-4">
+							<h3 class="h6 fw-bold text-secondary">Phone</h3>
+							<p>+1(240)-645-2283</p>
+						</div>
+
+						<div class="col-6 col-lg-6 mb-4">
+							<h3 class="h6 fw-bold text-secondary">Email</h3>
+							<p>
+								divinestridesinc@gmail.com
+							</p>
+						</div>
+
+					</div>
+				</div>
+				
+
+		</div>
+	</div>
+
+	<div class="section sec-instagram pb-4">
+		<div class="container mb-5">
+			<div class="row align-items-center gap-4">
+				<div class="col-lg-3" data-aos="fade-up">
+					<h2 class="heading">Making A Difference</h2>
+				</div>
+				<div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
+					<p>
+					We are committed to transforming lives by addressing critical needs in underserved communities. Through our programs, partnerships, and dedicated volunteers, education, and support to those facing hardship.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="site-footer">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
+					<div class="widget">
+						<h3>Navigation</h3>
+						<ul class="list-unstyled float-left links">
+							<li><a href="#">About us</a></li>
+							<li><a href="#">Donate Now</a></li>
+							<li><a href="#">Volunteer</a></li>
+							<li><a href="#">Terms</a></li>
+							<li><a href="#">Privacy</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
+					<div class="widget">
+						<h3>Popular Causes</h3>
+						<ul class="list-unstyled float-left links">
+							<li><a href="#">Food for the Hungry</a></li>
+							<li><a href="#">Education for Children</a></li>
+							<li><a href="#">Support for Livelihood</a></li>
+							<li><a href="#">Medical Mission</a></li>
+							<li><a href="#">Education</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
+					<div class="widget">
+						<h3>Services</h3>
+						<ul class="list-unstyled float-left links">
+							<li><a href="#">Causes</a></li>
+							<li><a href="#">Volunteer</a></li>
+							<li><a href="#">Terms</a></li>
+						</ul>
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+
+				<div class="col-6 col-sm-6 col-md-6 col-lg-3">
+					<div class="widget">
+						<h3>Contact</h3>
+						<ul class="list-unstyled links mb-4">
+							<li><a href="">9515 Gerwig Lane (Unit 104) Columbia, MD. 21046</a></li>
+							<li><a href="">Opening Days: Tuesdays-Saturdays (10am-5pm)</a></li>
+							<li><a href="tel://12406452283">+1(240)-645-2283</a></li>
+							<li><a href="mailto:divinestridesinc@gmail.com">divinestridesinc@gmail.com</a></li>
+						</ul>
+
+
+					</div> <!-- /.widget -->
+				</div> <!-- /.col-lg-3 -->
+
+			</div> <!-- /.row -->
+
+
+			<div class="row mt-5">
+				<div class="col-12 text-center">
+					<p class="copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved &mdash; Built by <a href="https://mailto:meshackchristian0@gmail.com?subject=Hello&body=I want you to build me a website.">CodeMaestro_Chris</a>
+					</p>
+				</div>
+			</div>
+		</div> <!-- /.container -->
+	</div> <!-- /.site-footer -->
+
+
+
+
+
+
+
+
+	<!-- Preloader -->
+	<div id="overlayer"></div>
+	<div class="loader">
+		<div class="spinner-border text-primary" role="status">
+			<span class="visually-hidden">Loading...</span>
+		</div>
+	</div>
+
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/tiny-slider.js"></script>
+
+	<script src="js/flatpickr.min.js"></script>
+	<script src="js/glightbox.min.js"></script>
+
+
+	<script src="js/aos.js"></script>
+	<script src="js/navbar.js"></script>
+	<script src="js/counter.js"></script>
+	<script src="js/custom.js"></script>
+	<script src="js/formvalidation.js"></script>
+</body>
+</html>

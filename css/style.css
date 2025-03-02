@@ -9180,9 +9180,9 @@ textarea {
   border-radius: 7px !important; }
 
 .hero {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
   background-color: #ccc; 
 }
   .hero, .hero > .container > .row {

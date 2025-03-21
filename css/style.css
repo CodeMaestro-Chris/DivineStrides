@@ -10104,3 +10104,11 @@ color: rgba(255, 255, 255, 0.5);
 .donate-form .form-group input:focus, .form-group select:focus{
   border-bottom: 1px solid navy;
 }
+.message-box {
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+.message-box p {
+  font-size: 18px;
+}

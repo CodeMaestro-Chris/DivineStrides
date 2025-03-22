@@ -8,7 +8,10 @@ const app = express();
 const PORT = 4000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://divinestridesinc.org', // allow only your frontend domain
+  methods: ['POST']
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

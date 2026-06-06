@@ -532,7 +532,7 @@ function handleSubmit(e) {
     submitBtn.innerText = "SENDING...";
     submitBtn.disabled = true;
 
-    fetch('http://localhost:7000/send-email', {
+    fetch('https://divinestrides.onrender.com/send-email', {
         method: 'POST',
         body: formData
     })

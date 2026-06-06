@@ -5,91 +5,80 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 7000;
+const PORT = process.env.PORT || 7000;
 
-// CORS - Allow multiple origins for testing
 app.use(cors({
-    origin: ['https://divinestridesinc.org', 'https://divinestrides.onrender.com', 'http://localhost:7000'],
+    origin: ['https://divinestridesinc.org', 'https://divinestrides.onrender.com'],
     methods: ['POST', 'GET'],
     allowedHeaders: ['Content-Type']
 }));
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+// IMPORTANT: Parse JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static(__dirname));
 
-// Log all requests
-app.use((req, res, next) => {
-    console.log(`📩 ${req.method} request from ${req.headers.origin}`);
-    console.log("📋 Body:", req.body);
-    next();
-});
-
-// GET route - just for testing
+// DEBUG route
 app.get('/send-email', (req, res) => {
-    console.log("⚠️ Received GET request");
     res.send('Use POST method only');
 });
 
-// POST route - main handler
 app.post('/send-email', async (req, res) => {
-    console.log("📨 Processing POST request...");
+    console.log("📨 Method:", req.method);
+    console.log("📨 Body:", req.body);
     
     const { name, email, amount, bank, 'account-name': accountName, date, message } = req.body;
-    
-    console.log("👤 Name:", name);
-    console.log("📧 Email:", email);
+
+    if (!name || !email) {
+        console.log("❌ Missing name or email");
+        return res.status(400).json({ error: 'Missing name or email' });
+    }
 
     let output = '';
-    let subject = '';
+    let subject = message ? 'New Contact Message' : 'New Donation Entry';
 
     if (message) {
-        subject = 'New Contact Message';
         output = `<h3>New Contact Message</h3>
                  <p><strong>Name:</strong> ${name}</p>
                  <p><strong>Email:</strong> ${email}</p>
-                 <p><strong>Message:</strong></p>
-                 <p>${message}</p>`;
+                 <p><strong>Message:</strong></p><p>${message}</p>`;
     } else {
-        subject = 'New Donation Entry';
-        output = `<h3>New Donation Entry</h3>
-                  <p><strong>Full Name:</strong> ${name}</p>
-                  <p><strong>Email:</strong> ${email}</p>
-                  <p><strong>Amount:</strong> ${amount}</p>
-                  <p><strong>Bank Name:</strong> ${bank}</p>
-                  <p><strong>Account Name:</strong> ${accountName}</p>
-                  <p><strong>Date:</strong> ${date}</p>`;
+        output = `<h3>New Donation</h3>
+                 <p><strong>Name:</strong> ${name}</p>
+                 <p><strong>Email:</strong> ${email}</p>
+                 <p><strong>Amount:</strong> $${amount}</p>
+                 <p><strong>Bank:</strong> ${bank}</p>
+                 <p><strong>Account Name:</strong> ${accountName}</p>
+                 <p><strong>Date:</strong> ${date}</p>`;
     }
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'divinestrideincinfo@gmail.com',
-            pass: 'hpupcdvcnfmvwqkz' // ⚠️ CHANGE THIS IMMEDIATELY!
-        }
+            user: 'meshackchristian0@gmail.com',
+            pass: 'jzkjtwcbrytrejma' // ⚠️ CHANGE THIS!
+        },
+        timeout: 15000
     });
-
-    let mailOptions = {
-        from: '"Website Form" <divinestrideincinfo@gmail.com>',
-        replyTo: email,
-        to: 'divinestrideincinfo@gmail.com',
-        subject: subject,
-        html: output
-    };
 
     try {
         console.log("📤 Sending email...");
-        await transporter.sendMail(mailOptions);
-        console.log("✅ Email sent successfully!");
-        
-        // Send success response
-        res.send('SUCCESS');
+        await transporter.sendMail({
+            from: '"Website" <meshackchristian0@gmail.com>',
+            replyTo: email,
+            to: 'meshackchristian0@gmail.com',
+            subject: subject,
+            html: output
+        });
+        console.log("✅ Email sent!");
+        res.json({ success: true, message: 'Email sent!' });
     } catch (error) {
-        console.error("❌ Email error:", error);
-        res.status(500).send('FAILED: ' + error.message);
+        console.error("❌ Error:", error.message);
+        res.status(500).json({ error: error.message });
     }
 });
 
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Running on port ${PORT}`);
 });

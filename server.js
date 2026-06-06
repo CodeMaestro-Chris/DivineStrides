@@ -9,7 +9,7 @@ const PORT = 7000;
 
 // CORS - Allow multiple origins for testing
 app.use(cors({
-    origin: ['https://divinestridesinc.org', 'https://divinestrides.onrender.com'],
+    origin: ['https://divinestridesinc.org', 'https://divinestrides.onrender.com', 'http://localhost:7000'],
     methods: ['POST', 'GET'],
     allowedHeaders: ['Content-Type']
 }));

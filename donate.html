@@ -20,6 +20,111 @@
 	<link rel="stylesheet" href="css/glightbox.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<title>Divine-Strides-INC</title>
+
+	<style>
+
+        /* CARD CONTAINER */
+        .donation-wrapper {
+            background: #fff;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* SLIDER MECHANISM */
+        .slider-container {
+            display: flex;
+            width: 200%; /* Two sections, so 200% width */
+            transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .step-section {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* RESPONSIVE FORMS */
+        @media (max-width: 768px) {
+            .step-section { width: 100%; padding: 25px; }
+            .slider-container { width: 100%; flex-direction: column; }
+            /* For mobile, we switch to simple show/hide rather than slide to prevent layout breakage */
+            .slider-container { width: 100%; transform: none !important; }
+            .step-section { display: none; padding-bottom: 50px; }
+            .step-section.active { display: block; }
+            .step-2 { margin-top: 20px; border-top: 1px solid #eee; }
+        }
+
+        /* TYPOGRAPHY & STYLES */
+        h2 { color: #333; margin-bottom: 20px; font-weight: 600; }
+        .text-muted { color: #6c757d; font-size: 0.9rem; display: block; margin-bottom: 4px; font-weight: 600; }
+        
+        /* GRID FOR DETAILS */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .detail-item { background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #007bff; }
+		.detail-item.red{
+			border-left: 4px solid rgb(255, 115, 0);
+		}
+		.detail-item.green{
+			border-left: 4px solid greenyellow;
+		}
+        .detail-label { font-size: 0.8rem; color: #6c757d; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .detail-value { font-size: 1.1rem; font-weight: 700; color: #212529; word-break: break-all; }
+
+        /* INPUTS */
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #444; }
+        input[type="text"], input[type="email"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input:focus { outline: none; border-color: #007bff; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+
+        /* CHECKBOX AREA */
+        .checkbox-area {
+            background: #e7f1ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+
+        /* BUTTONS */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-primary:hover { background: #0056b3 !important; transform: translateY(-2px); color: white !important;}
+        .btn-outline { background: transparent; border: 1px solid #ccc; color: #666; margin-top: 10px; }
+        .btn-outline:hover { background: #f8f9fa; color: #333; border: 1px solid #333; }
+
+        /* ERROR MESSAGE */
+        #error-message { color: #dc3545; font-size: 0.9rem; margin-top: 10px; display: none; }
+        
+    </style>
+
 </head>
 <body>
 
@@ -83,12 +188,12 @@
 	<div class="bg-light mb-2 py-5">
 		<div class="container overflow-hidden">
 			<div class="align-items-center" id="account">
-				<div class="col-12 mx-auto mt-5 bg-white img-box-shadow p-5 my-5 row gap-5" id="acct-details" data-aos="fade-up">
+				<div class="col-12 mx-auto bg-white img-box-shadow p-2 p-lg-5 my-5" id="acct-details" data-aos="fade-up">
 					<center>
 						<h1 class="my-4 title">Make A Donation</h1>
 						<p class="mt-1 mb-3 instruction">MAKE PAYMENTS USING THE DETAILS BELOW</p>
 					</center>
-					<div class="d-flex">
+					<!-- <div class="d-flex">
 						<div class="details col-12 row">
 							<div class="py-1 col-lg-4 col-sm-12">
 								<p class="text-black-50 mt-4">ACCOUNT NAME:</p>
@@ -156,6 +261,97 @@
 								<a class="btn text-primary py-3" onclick="goBack()" style="margin-right: 1px; padding-left: 2px;"><span class="icon icon-chevron-left"></span> Go Back</a>
 								<button type="submit" class="btn btn-primary text-white py-3 px-4">CONFIRM</button>
 						</form>
+					</div> -->
+					<div class="donation-wrapper">
+						<!-- The Slider Wrapper -->
+						<form class="slider-container" id="donationForm" onsubmit="return handleSubmit(event)" action="https://divinestrides.onrender.com/send-email" method="POST">
+							
+							<!-- SECTION 1: ACCOUNT DETAILS -->
+							<div class="step-section step-1 active" id="step1">
+								<h2>Donation Account Details</h2>
+								
+								<div class="details-grid">
+									<div class="detail-item">
+										<div class="detail-label">Account Name</div>
+										<div class="detail-value">DIVINE STRIDES INC</div>
+									</div>
+									<div class="detail-item">
+										<div class="detail-label">Checking Acct No</div>
+										<div class="detail-value">1210008921863</div>
+									</div>
+									<div class="detail-item">
+										<div class="detail-label">Routing No</div>
+										<div class="detail-value">055003308</div>
+									</div>
+									<div class="detail-item">
+										<div class="detail-label">Bank Name</div>
+										<div class="detail-value">TRUIST BANK</div>
+									</div>
+									<div class="detail-item red">
+										<div class="detail-label">Secondary</div>
+										<div class="detail-value">ZELLE</div>
+									</div>
+									<div class="detail-item red">
+										<div class="detail-label">Email</div>
+										<div class="detail-value">divinestridesinc@gmail.com</div>
+									</div>
+									<div class="detail-item green">
+										<div class="detail-label">Cash App Info</div>
+										<div class="detail-value">$divinestridesinc</div>
+									</div>
+								</div>
+
+								<div class="checkbox-area">
+									<input type="checkbox" name="donated" id="donated" required>
+									<label for="donated" style="margin:0; cursor:pointer;">I confirm that I have made the transfer using the details above.</label>
+								</div>
+
+								<button type="button" class="btn btn-primary" onclick="nextStep()">PROCEED TO CONFIRM</button>
+							</div>
+
+							<!-- SECTION 2: DONOR DETAILS -->
+							<div class="step-section step-2">
+								<h2>Confirm Donation</h2>
+								
+								<div class="form-group">
+									<label for="name">Full Name</label>
+									<input type="text" id="name" name="name" placeholder="John Doe" required>
+								</div>
+
+								<div class="form-group">
+									<label for="email">Email Address</label>
+									<input type="email" id="email" name="email" placeholder="john@example.com" required>
+								</div>
+
+								<div class="details-grid" style="grid-template-columns: 1fr 1fr;">
+									<div class="form-group">
+										<label for="amount">Donation Amount ($)</label>
+										<input type="number" id="amount" name="amount" placeholder="0.00" required>
+									</div>
+									<div class="form-group">
+										<label for="date">Date Sent</label>
+										<input type="date" id="date" name="date" required>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="bank">Your Bank Name</label>
+									<input type="text" id="bank" name="bank" placeholder="Chase / BoA / etc" required>
+								</div>
+
+								<div class="form-group">
+									<label for="account-name">Your Account Name</label>
+									<input type="text" id="account-name" name="account-name" placeholder="As written on your check" required>
+								</div>
+
+								<i id="error-message">Please fill out all fields correctly.</i>
+
+								<div style="display: flex; gap: 10px;">
+									<button type="button" class="btn btn-outline" onclick="prevStep()">Back</button>
+									<button type="submit" class="btn btn-primary">CONFIRM DONATION</button>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -163,96 +359,6 @@
 		</div>
 	</div>
 
-	
-
-	<!-- <div class="section bg-light">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_1-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<div class="px-4 pb-3 pt-3">
-							<span class="date">May 11, 2020</span>
-							<h3><a href="#">Food for the Hungry</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-
-							
-						</div>
-					</div>
-				</div>		
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_2-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<div class="px-4 pb-3 pt-3">
-							<span class="date">May 11, 2020</span>
-							<h3><a href="#">Education for Children</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-							
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_3-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<span class="date">May 11, 2020</span>
-						<div class="px-4 pb-3 pt-3">
-							<h3><a href="#">Support Livelihood</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-							
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_4-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<div class="px-4 pb-3 pt-3">
-							<span class="date">May 11, 2020</span>
-
-							<h3><a href="#">Food for the Hungry</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_5-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<div class="px-4 pb-3 pt-3">
-							<span class="date">May 11, 2020</span>
-							<h3><a href="#">Education for Children</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-4 col-md-6">
-					<div class="causes-item bg-white">
-						<a href="#"><img src="images/img_v_6-min.jpg" alt="Image" class="img-fluid mb-4 rounded"></a>
-						<div class="px-4 pb-3 pt-3">
-							<span class="date">May 11, 2020</span>
-							<h3><a href="#">Support Livelihood</a></h3>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta labore eligendi tempora laudantium voluptate, amet ad libero facilis nihil officiis.</p>
-							<p><a href="#" class="d-flex align-items-center more2"><span>Read More</span> <span class="icon-chevron-right"></span></a></p>
-							
-						</div>
-					</div>
-				</div>
-
-			</div>	
-
-
-			
-		</div>		
-	</div> -->
 
 
 
@@ -364,5 +470,98 @@
 	<script src="js/counter.js"></script>
 	<script src="js/custom.js"></script>
 	<script src="js/formvalidation.js"></script>
+
+	<script>
+    // SIMPLE SLIDER LOGIC
+    const slider = document.getElementById('donationForm');
+    const step1 = document.querySelector('.step-1');
+    const step2 = document.querySelector('.step-2');
+    const errorMsg = document.getElementById('error-message');
+
+    function nextStep() {
+        const checkbox = document.getElementById('donated');
+        if(!checkbox.checked) {
+            alert("Please check the box confirming you made the donation.");
+            return;
+        }
+        // Desktop slide
+        slider.style.transform = 'translateX(-50%)';
+        // Mobile Logic
+        if(window.innerWidth <= 768) {
+            step1.classList.remove('active');
+            step2.classList.add('active');
+        }
+    }
+
+    function prevStep() {
+        // Desktop slide back
+        slider.style.transform = 'translateX(0)';
+        // Mobile Logic
+        if(window.innerWidth <= 768) {
+            step2.classList.remove('active');
+            step1.classList.add('active');
+        }
+    }
+
+    // Unified handleSubmit function
+// Debug handleSubmit function
+function handleSubmit(e) {
+    e.preventDefault(); // ALWAYS stop default
+    
+    const inputs = document.querySelectorAll('.step-2 input');
+    let valid = true;
+    
+    inputs.forEach(input => {
+        if (!input.value) valid = false;
+    });
+
+    if (!valid) {
+        errorMsg.style.display = 'block';
+        errorMsg.innerText = "All fields are required.";
+        console.error("Validation failed: Empty fields");
+        return false;
+    }
+
+    const form = document.getElementById('donationForm');
+    const formData = new FormData(form);
+
+    // Console log the data being sent
+    console.log("📤 Sending data:", Object.fromEntries(formData));
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.innerText = "SENDING...";
+    submitBtn.disabled = true;
+
+    fetch('http://localhost:7000/send-email', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        console.log("📥 Response status:", response.status);
+        console.log("📥 Response ok:", response.ok);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text(); // Get text response
+    })
+    .then(data => {
+        console.log("✅ Success! Server response:", data);
+        window.location.href = '/success.html';
+    })
+    .catch(error => {
+        console.error("❌ Error:", error);
+        errorMsg.style.display = 'block';
+        errorMsg.innerText = "Error: " + error.message;
+        submitBtn.innerText = "CONFIRM DONATION";
+        submitBtn.disabled = false;
+    });
+
+    return false;
+}
+</script>
+
+
+
 </body>
 </html>

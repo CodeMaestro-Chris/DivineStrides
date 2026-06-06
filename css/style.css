@@ -9997,19 +9997,19 @@ color: rgba(255, 255, 255, 0.5);
 }
 
 .swipe{
-  transform: translateX(-1150px);
+  transform: translateX(-1000px);
   transition: 0.45s;
 }
 
 @media screen and (max-width: 1200px) {
   .swipe{
-    transform: translateX(-800px);
+    transform: translateX(-600px);
   }
 }
 
 @media screen and (max-width: 991px) {
   .swipe{
-    transform: translateX(-600px);
+    transform: translateX(-400px);
   }
 }
 
@@ -10056,17 +10056,29 @@ color: rgba(255, 255, 255, 0.5);
   .swipe{
     transform: translateX(-260px) !important;
   }
+  .donate-form .form-group {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
 }
 
 @media screen and (max-width: 425px) {
   .swipe{
     transform: translateX(-260px) !important;
   }
+  .donate-form .form-group {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
 }
 
 @media screen and (max-width: 400px) {
   .swipe{
     transform: translateX(-220px) !important;
+  }
+  .donate-form .form-group {
+    width: 100% !important;
+    margin-bottom: 15px;
   }
 }
 
@@ -10078,6 +10090,15 @@ color: rgba(255, 255, 255, 0.5);
 .donate-form .form-group {
   width: 47%;
   margin-bottom: 15px;
+}
+@media screen and (max-width: 400px) {
+  .swipe{
+    transform: translateX(-220px) !important;
+  }
+  .donate-form .form-group {
+    width: 100% !important;
+    margin-bottom: 15px;
+  }
 }
 .donate-form .form-group input, .form-group select {
   width: 100%;
